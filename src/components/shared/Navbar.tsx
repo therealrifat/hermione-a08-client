@@ -1,9 +1,10 @@
 import Image from "next/image";
-import React from "react";
-import { Button } from "../ui/button";
+
+
 import Link from "next/link";
-import { CalendarDays, LogIn } from "lucide-react";
+import { CalendarDays, } from "lucide-react";
 import { ModeToggle } from "../mode-toggle";
+import UserProfile from './../profile/user-profile';
 
 const Navbar = () => {
   return (
@@ -29,7 +30,7 @@ const Navbar = () => {
 
       <div className="flex gap-5">
        <ModeToggle />
-       <Link href="login"><Button className="bg-green-800 rounded-md"><LogIn/> Login</Button></Link>
+       <UserProfile/>
       </div>
     </div>
     </div>
