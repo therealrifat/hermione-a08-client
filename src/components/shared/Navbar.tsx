@@ -4,7 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, } from "lucide-react";
 import { ModeToggle } from "../mode-toggle";
-import UserProfile from './../profile/user-profile';
+import UserProfile from "./user-profile";
+
+
 
 const Navbar = () => {
   return (

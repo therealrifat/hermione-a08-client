@@ -13,6 +13,10 @@ const UserProfile = () => {
 
   const userInfo = session?.user;
 
+//   const handleLogout= async()=>{
+//     await authClient.signOut();
+//   }
+
   return (
     <div>
       {userInfo ? (
@@ -23,7 +27,7 @@ const UserProfile = () => {
           </Avatar>
 
           <Link href="login">
-            <Button className="bg-green-800 rounded-md">
+            <Button  className="bg-green-800 rounded-md">
               <LogOut /> Logout
             </Button>
           </Link>
