@@ -1,9 +1,11 @@
+import { LoginForm } from '@/components/form/login-from';
 import React from 'react';
 
 const SignInPage = () => {
     return (
-        <div>
-            <h1>Login in Page </h1>
+        <div className='flex flex-col items-center'>
+       
+            <LoginForm/>
         </div>
     );
 };
