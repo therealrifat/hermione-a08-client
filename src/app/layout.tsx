@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { Geist} from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
-
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-
-
 
 export const metadata: Metadata = {
   title: "BondHub",
@@ -20,13 +18,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      data-theme="light"
+      suppressHydrationWarning
+
       className={`${geistSans.className}  h-full antialiased`}
     >
       <body className="min-h-full flex flex-col ">
-        <Navbar/>
-        {children}
-        </body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -3,11 +3,12 @@ import React from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { CalendarDays, LogIn } from "lucide-react";
+import { ModeToggle } from "../mode-toggle";
 
 const Navbar = () => {
   return (
 
-    <div className="bg-green-100 py-2">
+    <div className="bg-green-100 dark:bg-gray-900 py-2">
       <div className="flex gap-5 max-w-7xl mx-auto justify-between items-center">
       <div className="flex items-center gap-2">
         <Image
@@ -26,9 +27,9 @@ const Navbar = () => {
 
       <Link href="#" className="mr-40 text-[#059669] flex gap-2"><CalendarDays/> Upcoming Event</Link>
 
-      <div>
-       
-        <Button className="bg-green-800 rounded-md"><LogIn/> Login</Button>
+      <div className="flex gap-5">
+       <ModeToggle />
+       <Button className="bg-green-800 rounded-md"><LogIn/> Login</Button>
       </div>
     </div>
     </div>
