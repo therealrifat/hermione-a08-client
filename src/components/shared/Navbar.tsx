@@ -29,7 +29,7 @@ const Navbar = () => {
 
       <div className="flex gap-5">
        <ModeToggle />
-       <Button className="bg-green-800 rounded-md"><LogIn/> Login</Button>
+       <Link href="login"><Button className="bg-green-800 rounded-md"><LogIn/> Login</Button></Link>
       </div>
     </div>
     </div>
