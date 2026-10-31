@@ -10,7 +10,6 @@ import {
 
 import { Separator } from "../ui/separator";
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
@@ -58,7 +57,7 @@ const DropdownProfile = ({ userName,userEmail, userImage }:{userName: string, us
             <Separator />
 
             <span onClick={handleLogout} className=" flex gap-1.5 ">
-              <span><LogOut className="" /></span> Logout
+              <span><LogOut className=" scale-80" /></span> Logout
             </span>
           </PopoverHeader>
         </PopoverContent>

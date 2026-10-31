@@ -81,11 +81,11 @@ export function SignUPForm() {
       <Card>
         <div className="flex flex-col items-center">
           <Image
-            src="/image/logo.png"
-            width={60}
+            src="/image/bondhub.png"
+            width={50}
             height={60}
             alt="logo"
-            className="border border-green-400 rounded-full py-2  "
+            className="border border-green-400 rounded-full px-2 py-1  "
           />
         </div>
         <CardHeader className="text-center">
@@ -163,7 +163,7 @@ export function SignUPForm() {
                   Login with Google
                 </Button>
                 <FieldDescription className="text-center">
-                  have an account? <a href="#">Login</a>
+                  have an account? <a href="/login">Login</a>
                 </FieldDescription>
               </Field>
             </FieldGroup>
