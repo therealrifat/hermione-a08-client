@@ -1,38 +1,57 @@
-"use client"
-import { Button } from "@/components/ui/button"
+"use client";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   Field,
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import Image from "next/image"
-import React from "react"
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
+import Image from "next/image";
+import React from "react";
 
 export function LoginForm() {
-    const handleLoginForm =(e: React.FormEvent<HTMLFormElement>)=>{
-        e.preventDefault()
+  const handleLoginForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const userInfo = Object.fromEntries(formData.entries());
+    
+    const { data, error } = await authClient.signIn.email({
+      email: userInfo.email as string,
+      password: userInfo.password as string,
+      callbackURL: "http://localhost:3000",
+    });
 
-        const formData = new FormData(e.currentTarget)
-        const data = Object.fromEntries(formData.entries())
-        console.log(data)
+    
 
+    if(data){
+      console.log(data);
     }
 
+    if(error){
+      console.log(error)
+    }
+  };
 
   return (
-    <div className="w-100 mt-10" >
+    <div className="w-100 mt-10">
       <Card>
         <div className="flex flex-col items-center">
-            <Image src='/image/logo.png' width={60} height={60} alt="logo" className="border border-green-400 rounded-full py-2  "/>
+          <Image
+            src="/image/logo.png"
+            width={60}
+            height={60}
+            alt="logo"
+            className="border border-green-400 rounded-full py-2  "
+          />
         </div>
         <CardHeader className="text-center">
           <CardTitle>Login to your account</CardTitle>
@@ -66,7 +85,9 @@ export function LoginForm() {
                 <Input id="password" type="password" name="password" required />
               </Field>
               <Field>
-                <Button type="submit" className={'bg-green-800'}>Login</Button>
+                <Button type="submit" className={"bg-green-800"}>
+                  Login
+                </Button>
                 <Button variant="outline" type="button">
                   Login with Google
                 </Button>
@@ -79,5 +100,5 @@ export function LoginForm() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

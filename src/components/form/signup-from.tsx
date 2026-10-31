@@ -14,6 +14,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
 import { signUpSchema } from "@/lib/validations/signup";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -41,17 +42,38 @@ export function SignUPForm() {
 
   const isPasswordValid = requirements.every((item) => item.valid);
 
-  const handleSignForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSignForm = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-    const result = signUpSchema.safeParse(data);
+    const userData = Object.fromEntries(formData.entries());
+    const result = signUpSchema.safeParse(userData);
     if (!result.success) {
       console.log(result.error.flatten().fieldErrors);
       return;
     }
-    console.log(result.data);
+    const userInfo = result.data
+    console.log(userInfo)
+
+    
+
+
+    
+    // bettter auth part 
+
+    const {data, error } = await authClient.signUp.email(
+      {
+        ...userInfo
+      }
+    )
+
+    if(data){
+      console.log(data)
+    }
+    
+
+
+
   };
 
   return (
