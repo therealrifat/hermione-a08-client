@@ -26,7 +26,7 @@ const UserProfile = () => {
     <div>
       {userInfo ? (
         <div className="flex gap-3 items-center">
-          <DropdownProfile userName={userInfo.name} userEmail={userInfo.email} userImage={userInfo.image} />
+          <DropdownProfile userName={userInfo.name} userEmail={userInfo.email} userImage={userInfo.image ?? ""} />
 
           <Button onClick={handleLogout} className="bg-green-800 rounded-md">
             <LogOut /> Logout
