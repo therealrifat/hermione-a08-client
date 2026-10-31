@@ -23,11 +23,11 @@ export function LoginForm() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const userInfo = Object.fromEntries(formData.entries());
-    
+
     const { data, error } = await authClient.signIn.email({
       email: userInfo.email as string,
       password: userInfo.password as string,
-      callbackURL: "http://localhost:3000",
+      callbackURL: "https://hermione-a08-client.vercel.app",
     });
 
     
