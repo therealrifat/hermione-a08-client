@@ -1,0 +1,38 @@
+import Image from "next/image";
+import React from "react";
+import { Button } from "../ui/button";
+import Link from "next/link";
+import { CalendarDays, LogIn } from "lucide-react";
+
+const Navbar = () => {
+  return (
+
+    <div className="bg-green-100 py-2">
+      <div className="flex gap-5 max-w-7xl mx-auto justify-between items-center">
+      <div className="flex items-center gap-2">
+        <Image
+          src="/image/bondhub.png"
+          width={45}
+          height={45}
+          alt="logo"
+        ></Image>
+        <div className="flex flex-col">
+          <h1 className="text-xl font-bold text-[#059669]">
+            Bond<span className="text-[#EA580C]">Hub</span>{" "}
+          </h1>
+          <span className=" text-[10px] font-semibold">Connect. Care. Change</span>
+        </div>
+      </div>
+
+      <Link href="#" className="mr-40 text-[#059669] flex gap-2"><CalendarDays/> Upcoming Event</Link>
+
+      <div>
+       
+        <Button className="bg-green-800 rounded-md"><LogIn/> Login</Button>
+      </div>
+    </div>
+    </div>
+  );
+};
+
+export default Navbar;
