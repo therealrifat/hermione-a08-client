@@ -3,40 +3,34 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { LogIn, LogOut } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Router from "next/router";
+import DropdownProfile from "./dropdown";
+import { useRouter } from "next/navigation";
 
 const UserProfile = () => {
-  const {
-    data: session,
-  } = authClient.useSession();
+  const router = useRouter()
+  const { data: session } = authClient.useSession();
 
   const userInfo = session?.user;
 
-  const handleLogout= async()=>{
+  const handleLogout = async () => {
     await authClient.signOut({
-  fetchOptions: {
-    onSuccess: () => {
-      Router.push("/login"); // redirect to login page
-    },
-  },
-});
-  }
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/login"); // redirect to login page
+        },
+      },
+    });
+  };
 
   return (
     <div>
       {userInfo ? (
         <div className="flex gap-3 items-center">
-          <Avatar size="lg">
-            <AvatarImage src={userInfo.image as string} />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+          <DropdownProfile userName={userInfo.name} userEmail={userInfo.email} userImage={userInfo.image} />
 
-          <Link href="login">
-            <Button onClick={handleLogout} className="bg-green-800 rounded-md">
-              <LogOut /> Logout
-            </Button>
-          </Link>
+          <Button onClick={handleLogout} className="bg-green-800 rounded-md">
+            <LogOut /> Logout
+          </Button>
         </div>
       ) : (
         <Link href="login">
