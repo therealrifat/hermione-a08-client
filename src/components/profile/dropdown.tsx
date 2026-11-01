@@ -44,7 +44,7 @@ const DropdownProfile = ({ userName,userEmail, userImage }:{userName: string, us
             <PopoverDescription>{userEmail}</PopoverDescription>
             <Separator />
             <div className="flex flex-col  space-y-1.5">
-              <Link className="flex gap-2 hover:bg-slate-100" href={"/"}>
+              <Link className="flex gap-2 hover:bg-slate-100" href={"/create-event"}>
                 Create Events
               </Link>
               <Link className="flex gap-2 hover:bg-slate-100" href={"/"}>
@@ -56,7 +56,7 @@ const DropdownProfile = ({ userName,userEmail, userImage }:{userName: string, us
             </div>
             <Separator />
 
-            <span onClick={handleLogout} className=" flex gap-1.5 ">
+            <span onClick={handleLogout} className=" flex gap-1.5 cursor-pointer hover:bg-slate-100  ">
               <span><LogOut className=" scale-80" /></span> Logout
             </span>
           </PopoverHeader>

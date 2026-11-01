@@ -61,7 +61,7 @@ export function SignUPForm() {
     
     // bettter auth part 
 
-    const {data, error } = await authClient.signUp.email(
+    const {data, } = await authClient.signUp.email(
       {
         ...userInfo
       }
