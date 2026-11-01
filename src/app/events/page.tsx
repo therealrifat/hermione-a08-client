@@ -1,24 +1,19 @@
-import EventCard from '@/components/shared/eventCard';
-import React from 'react';
+import EventCard, { IEvent } from "@/components/shared/eventCard";
+import React from "react";
 
-const UpComingEvents =async () => {
-    const res = await fetch('http://localhost:8000/events')
-    const events = await res.json()
-    
-    return (
-        <div>
-            
+const UpComingEvents = async () => {
+  const res = await fetch("http://localhost:8000/events");
+  const events = await res.json();
 
-            {
-                events.map((evnt, ind)=> <EventCard key={ind} evnt={evnt}/>)
-            }
-
-
-            
-
-
-        </div>
-    );
+  return (
+    <div className="max-w-7xl mx-auto">
+      <div className="grid grid-cols-3 gap-5">
+        {events.map((evnt: IEvent, ind: number) => (
+          <EventCard key={ind} evnt={evnt} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default UpComingEvents;
