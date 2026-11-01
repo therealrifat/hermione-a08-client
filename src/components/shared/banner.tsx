@@ -2,6 +2,7 @@
 import { Button } from '../ui/button';
 import { CalendarDays, CalendarPlus } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Banner = () => {
     return (
@@ -12,7 +13,7 @@ const Banner = () => {
 
 
             <div className='flex gap-10'>
-                <Button className="bg-green-800 scale-120"><CalendarPlus/> Create Event</Button>
+                <Link href={'events/create'}><Button className="bg-green-800 scale-120"><CalendarPlus/> Create Event</Button></Link>
                 <Button variant={'outline'} className="text-green-800 scale-120"><CalendarDays/> Explore Events</Button>
             </div>
 

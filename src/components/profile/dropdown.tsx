@@ -44,13 +44,13 @@ const DropdownProfile = ({ userName,userEmail, userImage }:{userName: string, us
             <PopoverDescription>{userEmail}</PopoverDescription>
             <Separator />
             <div className="flex flex-col  space-y-1.5">
-              <Link className="flex gap-2 hover:bg-slate-100" href={"/create-event"}>
+              <Link className="flex gap-2 hover:bg-slate-100" href={"/events/create"}>
                 Create Events
               </Link>
-              <Link className="flex gap-2 hover:bg-slate-100" href={"/"}>
+              <Link className="flex gap-2 hover:bg-slate-100" href={"/events/manage"}>
                 Manage Events
               </Link>
-              <Link className="flex gap-2 hover:bg-slate-100" href={"/"}>
+              <Link className="flex gap-2 hover:bg-slate-100" href={"/events/joined"}>
                 Joined Events
               </Link>
             </div>

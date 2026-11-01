@@ -14,6 +14,7 @@ const Navbar = () => {
 
     <div className="bg-green-100 dark:bg-gray-900 py-2">
       <div className="flex gap-5 max-w-7xl mx-auto justify-between items-center">
+      <Link href={"/"}>
       <div className="flex items-center gap-2">
         <Image
           src="/image/bondhub.png"
@@ -28,8 +29,9 @@ const Navbar = () => {
           <span className=" text-[10px] font-semibold">Connect. Care. Change</span>
         </div>
       </div>
+      </Link>
 
-      <Link href="#" className="mr-40 text-[#059669] flex gap-2"><CalendarDays/> Upcoming Event</Link>
+      <Link href="/events" className="mr-40 text-[#059669] flex gap-2"><CalendarDays/> Upcoming Event</Link>
 
       <div className="flex gap-5">
        <ModeToggle />
