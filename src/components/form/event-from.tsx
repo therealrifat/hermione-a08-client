@@ -13,13 +13,14 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
-import  React from "react";
+import  React, { useState } from "react";
 import { format } from "date-fns";
+import { authClient } from "@/lib/auth-client";
 
 export default function EventFrom() {
 
-
-  const [date, setDate] = React.useState<Date>();
+  const [category, setCategory] = useState("Education");
+  const [date, setDate] = useState<Date>();
   const eventDate = date ? format(date, "dd-MM-yyyy") : "";
 
   const categoris = [
@@ -28,13 +29,32 @@ export default function EventFrom() {
     { label: "Health & Wellness", value: "Health & Wellness" },
     { label: "Community & Culture", value: "Community & Culture" },
   ];
+  const { 
+        data: session, 
+        
+    } = authClient.useSession() 
 
-  const handleEventForm =(e: React.FormEvent<HTMLFormElement>)=>{
+    const userInfo = session?.user
+
+
+
+  const handleEventForm =async(e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
-    const eventData = Object.fromEntries(formData.entries())
+    const event = Object.fromEntries(formData.entries())
+    const eventData ={...event, eventDate, category, creatorName: userInfo?.name, creatorEmail: userInfo?.email }
+    console.log(eventData)
+    console.log(`${process.env.NEXT_PUBLIC_SERVER_URL}/events`)
 
-    console.log(eventData,"date",eventDate)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/events`,{
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(eventData)
+    })
+
+    const afterSubmit = await res.json()
+
+    console.log(afterSubmit)
 
   }
 
@@ -86,7 +106,7 @@ export default function EventFrom() {
             </Field>
             <Field>
               <FieldLabel htmlFor="form-category">Category</FieldLabel>
-              <Select items={categoris} defaultValue="Education">
+              <Select items={categoris} onValueChange={setCategory} value={category} defaultValue="Education">
                 <SelectTrigger id="form-category">
                   <SelectValue />
                 </SelectTrigger>

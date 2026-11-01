@@ -2,7 +2,7 @@ import EventCard, { IEvent } from "@/components/shared/eventCard";
 import React from "react";
 
 const UpComingEvents = async () => {
-  const res = await fetch("http://localhost:8000/events");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/events`);
   const events = await res.json();
 
   return (
