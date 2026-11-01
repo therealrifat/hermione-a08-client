@@ -1,12 +1,13 @@
+import EventFrom from '@/components/form/event-from';
+import React from 'react';
 
-
-const CreateEvent = () => {
+const CreateEventPage = () => {
     return (
-        <div>
-            this create event page 
-            
+        <div className='flex flex-col items-center'>
+            <h1>Create Your Event</h1>
+            <EventFrom/>
         </div>
     );
 };
 
-export default CreateEvent;
+export default CreateEventPage;

@@ -1,13 +1,26 @@
-import React from 'react';
+import Link from "next/link";
+import React from "react";
 
-const EventDetailsPage = async({params}) => {
-    const {EventId} =await params
+const EventDetailsPage = async ({
+  params,
+}: {
+  params: Promise<{ EventId: string }>;
+}) => {
+  const { EventId } = await params;
 
-    return (
-        <div>
-            <h1>Details Page: {EventId}</h1>
-        </div>
-    );
+  const res = await fetch(`http://localhost:8000/events/${EventId}`);
+  const data = await res.json();
+
+  return (
+    <div>
+        <Link href={"/events"}>Back to Upcoming Event</Link>
+      <div className="max-w-7xl mx-auto">
+        <h1>Details Page: {EventId}</h1>
+
+        <h1>Title : {data.eventTitle}</h1>
+      </div>
+    </div>
+  );
 };
 
 export default EventDetailsPage;
