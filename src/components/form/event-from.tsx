@@ -21,7 +21,7 @@ export default function EventFrom() {
 
   const [category, setCategory] = useState("Education");
   const [date, setDate] = useState<Date>();
-  const eventDate = date ? format(date, "dd-MM-yyyy") : "";
+  const eventDate = date ? format(date, "yyyy-MM-dd") : "";
 
   const categoris = [
     { label: "Education", value: "Education" },
@@ -106,7 +106,7 @@ export default function EventFrom() {
             </Field>
             <Field>
               <FieldLabel htmlFor="form-category">Category</FieldLabel>
-              <Select items={categoris} onValueChange={setCategory} value={category} defaultValue="Education">
+              <Select items={categoris} onValueChange={(value) => { if (value !== null) setCategory(value); }} value={category} defaultValue="Education">
                 <SelectTrigger id="form-category">
                   <SelectValue />
                 </SelectTrigger>
