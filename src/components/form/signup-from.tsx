@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { signUpSchema } from "@/lib/validations/signup";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -69,7 +70,8 @@ export function SignUPForm() {
     )
 
     if(data?.token){
-      toast.success("Account Create Successfull")
+      toast.success(`${data?.user?.name} Account Create Successfull`)
+      redirect('/events')
     }
     
     if(error){

@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import React from "react";
+import toast from "react-hot-toast";
 
 export function LoginForm() {
   const handleLoginForm = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,12 +33,12 @@ export function LoginForm() {
 
     
 
-    if(data){
-      console.log(data);
+    if(data?.token){
+      toast.success(`${data?.user?.name} Login Successfull `)
     }
 
     if(error){
-      console.log(error)
+      toast.error(error.message as string)
     }
   };
 

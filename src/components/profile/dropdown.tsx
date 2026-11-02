@@ -13,6 +13,7 @@ import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
+import toast from "react-hot-toast";
 
 const DropdownProfile = ({ userName,userEmail, userImage }:{userName: string, userEmail: string, userImage: string}) => {
 
@@ -22,6 +23,7 @@ const DropdownProfile = ({ userName,userEmail, userImage }:{userName: string, us
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
+          toast.success("Logout")
           router.push("/login"); // redirect to login page
         },
       },
