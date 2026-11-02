@@ -3,12 +3,23 @@ import { authClient } from "@/lib/auth-client";
 import { Button } from "../ui/button";
 import { IEvent } from "./eventCard";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 
 const EventJoind = ({ data }: {data: IEvent}) => {
   const { data: session } = authClient.useSession();
+  const router = useRouter();
   
   const handleJoinEvent = async() => {
+      if (!session) {
+        
+
+      router.push("/login");
+      toast.error("Please login to join this event");
+
+      return;
+    }
+
     const jointEvent = {
       eventId: data._id,
       eventName: data.eventTitle,
