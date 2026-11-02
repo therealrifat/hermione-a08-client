@@ -31,7 +31,7 @@ const ManageEvent = async () => {
             <h1>{e.eventTitle}</h1>
             <h1>{dateToText(e.eventDate)}</h1>
             <Link href={`/events/${e._id}`}> <Eye/> </Link>
-            <EventDelete id={e._id} />
+            <EventDelete id={e._id }/>
             
             
           </div>

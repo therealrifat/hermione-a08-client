@@ -14,20 +14,28 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
-const EventDelete = ({ id }: { id: number }) => {
+
+
+
+const EventDelete = ({ id }: { id: string }) => {
+  const router = useRouter()
+
   const handleDeleteEvent = async () => {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/manage/${id}`,{
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/manage/${id}`,
+      {
         method: "DELETE",
-      }
+      },
     );
-    console.log(id)
 
-    const afterSubmit = await res.json()
+    const afterSubmit = await res.json();
 
-    // toast.success("Delete");
-    console.log(afterSubmit)
+    if (afterSubmit.deletedCount > 0) {
+      router.refresh()
+      toast.success("delete")
+    }
   };
   return (
     <div>
@@ -35,7 +43,7 @@ const EventDelete = ({ id }: { id: number }) => {
         <AlertDialogTrigger render={<Trash />}></AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently delete your
               account from our servers.
@@ -43,8 +51,8 @@ const EventDelete = ({ id }: { id: number }) => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDeleteEvent}>
-              Continue
+            <AlertDialogAction variant="destructive" onClick={handleDeleteEvent}>
+              Delete
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
