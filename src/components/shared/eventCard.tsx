@@ -15,7 +15,6 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardAction,
-
   CardDescription,
   CardFooter,
   CardHeader,
@@ -23,19 +22,17 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 
+export const dateToText = (date: string) => {
+  const formattedDate = new Date(date).toLocaleDateString("en-US", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  return formattedDate;
+};
+
 const EventCard = ({ evnt }: { evnt: IEvent }) => {
-
-
-  const dateToText = (date:string) => {
-    const formattedDate = new Date(date).toLocaleDateString("en-US", {
-      weekday: "long",
-      day: "numeric", 
-      month: "long", 
-      year: "numeric", 
-    });
-    return formattedDate
-
-  };
   return (
     <div>
       <Card className="relative mx-auto w-full max-w-sm pt-0">
@@ -51,13 +48,15 @@ const EventCard = ({ evnt }: { evnt: IEvent }) => {
           <CardAction>
             <Badge variant="secondary">{evnt.eventType}</Badge>
           </CardAction>
-          <CardTitle className="text-xl text-green-500">{evnt.eventTitle}</CardTitle>
-          
+          <CardTitle className="text-xl text-green-500">
+            {evnt.eventTitle}
+          </CardTitle>
+
           <p>{dateToText(evnt.eventDate)}</p>
-        
+
           <CardDescription>{evnt.eventDescription}</CardDescription>
         </CardHeader>
-        
+
         <CardFooter>
           <Link href={`/events/${evnt._id}`}>
             <Button className="w-full bg-green-700">View Event</Button>
