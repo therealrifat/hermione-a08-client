@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 
 const EventJoind = ({ data }: {data: IEvent}) => {
   const { data: session } = authClient.useSession();
+  
   const handleJoinEvent = async() => {
     const jointEvent = {
       eventId: data._id,
