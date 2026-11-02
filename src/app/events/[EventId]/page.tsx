@@ -1,3 +1,4 @@
+import EventJoind from "@/components/shared/event-joined";
 import Link from "next/link";
 import React from "react";
 
@@ -18,6 +19,7 @@ const EventDetailsPage = async ({
         <h1>Details Page: {EventId}</h1>
 
         <h1>Title : {data.eventTitle}</h1>
+        <EventJoind data={data}/>
       </div>
     </div>
   );
