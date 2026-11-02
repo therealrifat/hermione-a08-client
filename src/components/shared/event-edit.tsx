@@ -28,6 +28,8 @@ import { Pencil } from "lucide-react";
 import { IEvent } from "./eventCard";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const EventEditPage = ({ evnt }: { evnt: IEvent }) => {
   const [category, setCategory] = useState(evnt.eventType);
@@ -40,7 +42,7 @@ const EventEditPage = ({ evnt }: { evnt: IEvent }) => {
     { label: "Health & Wellness", value: "Health & Wellness" },
     { label: "Community & Culture", value: "Community & Culture" },
   ];
-
+  const router =useRouter()
   const handleEditForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -54,7 +56,17 @@ const EventEditPage = ({ evnt }: { evnt: IEvent }) => {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(updateEvent)
     })
-    
+
+    const afterSubmit = await res.json()
+    console.log(afterSubmit)
+    if(afterSubmit.modifiedCount > 0){
+          console.log(afterSubmit)
+          toast.success("Event Update Successfull")
+          router.refresh()
+    }
+
+  
+
   };
 
   return (
@@ -189,9 +201,10 @@ const EventEditPage = ({ evnt }: { evnt: IEvent }) => {
 
             <DialogFooter>
               <DialogClose render={<Button variant="outline">Cancel</Button>} />
-              <Button type="submit" disabled={date ? false : true}>
+              <DialogClose render={<Button type="submit" disabled={date ? false : true}>
                 Save changes
-              </Button>
+              </Button>} />
+              
             </DialogFooter>
           </form>
         </DialogContent>
