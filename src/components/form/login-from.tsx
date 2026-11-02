@@ -18,6 +18,7 @@ import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import React from "react";
 import toast from "react-hot-toast";
+import SignInWithSocial from "./SignInWithSocial";
 
 export function LoginForm() {
   const handleLoginForm = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -89,8 +90,9 @@ export function LoginForm() {
                 <Button type="submit" className={"bg-green-800"}>
                   Login
                 </Button>
-                <Button variant="outline" type="button">
-                  Login with Google
+                <Button variant="outline" type="button" render={<SignInWithSocial/>}>
+                  
+                  
                 </Button>
                 <FieldDescription className="text-center">
                   Don&apos;t have an account? <a href="signup">Sign up</a>

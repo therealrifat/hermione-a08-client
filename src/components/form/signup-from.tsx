@@ -20,6 +20,7 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import SignInWithSocial from "./SignInWithSocial";
 
 export function SignUPForm() {
   const [password, setPassword] = useState("");
@@ -166,8 +167,7 @@ export function SignUPForm() {
                 <Button type="submit" disabled={!isPasswordValid} className={"bg-green-800 cursor-pointer"}>
                   Login
                 </Button>
-                <Button variant="outline" type="button">
-                  Login with Google
+                <Button variant="outline" type="button" render={<SignInWithSocial/>}>
                 </Button>
                 <FieldDescription className="text-center">
                   have an account? <a href="/login">Login</a>
