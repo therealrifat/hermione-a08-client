@@ -16,6 +16,8 @@ import { Calendar } from "../ui/calendar";
 import  React, { useState } from "react";
 import { format } from "date-fns";
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
+import { redirect } from "next/navigation";
 
 export default function EventFrom() {
 
@@ -43,8 +45,6 @@ export default function EventFrom() {
     const formData = new FormData(e.currentTarget)
     const event = Object.fromEntries(formData.entries())
     const eventData ={...event, eventDate, category, creatorName: userInfo?.name, creatorEmail: userInfo?.email }
-    console.log(eventData)
-    console.log(`${process.env.NEXT_PUBLIC_SERVER_URL}/events`)
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/events`,{
       method: "POST",
@@ -54,7 +54,15 @@ export default function EventFrom() {
 
     const afterSubmit = await res.json()
 
-    console.log(afterSubmit)
+    if(afterSubmit.insertedId){
+
+      toast.success("Event Added Successful")
+      redirect('/events')
+    }
+
+
+
+
 
   }
 
@@ -153,7 +161,7 @@ export default function EventFrom() {
             <Button type="reset" variant="outline">
               Reset
             </Button>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={date ? false : true} >Submit</Button>
           </Field>
         </FieldGroup>
       </form>

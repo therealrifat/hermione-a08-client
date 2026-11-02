@@ -18,6 +18,7 @@ import { authClient } from "@/lib/auth-client";
 import { signUpSchema } from "@/lib/validations/signup";
 import Image from "next/image";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 export function SignUPForm() {
   const [password, setPassword] = useState("");
@@ -61,16 +62,20 @@ export function SignUPForm() {
     
     // bettter auth part 
 
-    const {data, } = await authClient.signUp.email(
+    const {data, error } = await authClient.signUp.email(
       {
         ...userInfo
       }
     )
 
-    if(data){
-      console.log(data)
+    if(data?.token){
+      toast.success("Account Create Successfull")
     }
     
+    if(error){
+      console.log(error)
+      toast.error(error.message as string)
+    }
 
 
 
