@@ -4,7 +4,7 @@ import React from "react";
 
 import {
   AlertDialog,
-  AlertDialogAction,
+
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -15,12 +15,11 @@ import {
 } from "@/components/ui/alert-dialog";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-
-
-
+import { DialogClose } from "../ui/dialog";
+import { Button } from "../ui/button";
 
 const EventDelete = ({ id }: { id: string }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   const handleDeleteEvent = async () => {
     const res = await fetch(
@@ -33,8 +32,8 @@ const EventDelete = ({ id }: { id: string }) => {
     const afterSubmit = await res.json();
 
     if (afterSubmit.deletedCount > 0) {
-      router.refresh()
-      toast.success("delete")
+      router.refresh();
+      toast.success("delete");
     }
   };
   return (
@@ -51,9 +50,9 @@ const EventDelete = ({ id }: { id: string }) => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction variant="destructive" onClick={handleDeleteEvent}>
-              Delete
-            </AlertDialogAction>
+            
+            <DialogClose onClick={handleDeleteEvent} render={<Button>Delete</Button>} />
+            
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
