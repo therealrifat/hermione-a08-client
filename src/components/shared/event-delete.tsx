@@ -22,6 +22,7 @@ const EventDelete = ({ id }: { id: number }) => {
         method: "DELETE",
       }
     );
+    console.log(id)
 
     const afterSubmit = await res.json()
 
