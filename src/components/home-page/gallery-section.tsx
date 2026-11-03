@@ -85,9 +85,9 @@ const GallerySection = () => {
 
       {/* Photo grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[160px] md:auto-rows-[200px]">
-        {galleryData.map((item) => (
+        {galleryData.map((item, ind) => (
           <div
-            key={item.title}
+            key={ind}
             className={`group relative overflow-hidden rounded-2xl ${
               item.tall ? "row-span-2" : "row-span-1"
             }`}

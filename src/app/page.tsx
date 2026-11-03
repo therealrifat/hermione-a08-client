@@ -4,11 +4,6 @@ import GallerySection from "@/components/home-page/gallery-section";
 import NewsletterSection from "@/components/home-page/newsletter-section";
 import RecentUpcomingEvent from "@/components/home-page/recent-upcoming-event";
 
-
-
-
-
-
 export default function Home() {
   return (
     <div>
@@ -17,10 +12,6 @@ export default function Home() {
       <RecentUpcomingEvent/>
       <GallerySection/>
       <NewsletterSection/>
-
-      
-
-
     </div>
   );
 }
