@@ -7,7 +7,7 @@ import UserProfile from "../profile/user-profile";
 
 const Navbar = () => {
   return (
-    <div className="bg-green-100 dark:bg-gray-900 py-2">
+    <div className="bg-green-100 dark:bg-gray-900 py-2 top-0 sticky z-50">
       <div className="flex gap-5 max-w-7xl mx-auto justify-between items-center px-2">
         <Link href={"/"}>
           <div className="flex items-center gap-2">

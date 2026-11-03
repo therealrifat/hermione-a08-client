@@ -45,7 +45,7 @@ const NewsletterSection = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto mt-10 px-4 md:px-0">
+    <div className="max-w-7xl mx-auto mt-10 mb-10 px-4 md:px-0">
       <div className="bg-gradient-to-r from-green-700 to-green-600 w-full rounded-2xl p-8 md:p-12">
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between">
           {/* Left: text + benefits */}
