@@ -35,7 +35,7 @@ export const dateToText = (date: string) => {
 const EventCard = ({ evnt }: { evnt: IEvent }) => {
   return (
     <div>
-      <Card className="relative mx-auto w-full max-w-sm pt-0">
+      <Card className="relative mx-auto w-full h-100 max-w-sm pt-0">
         <div className="absolute  z-30  " />
         <Image
           src={evnt.image}
@@ -48,13 +48,13 @@ const EventCard = ({ evnt }: { evnt: IEvent }) => {
           <CardAction>
             <Badge variant="secondary">{evnt.eventType}</Badge>
           </CardAction>
-          <CardTitle className="text-xl text-green-500">
+          <CardTitle className="text-lg text-green-500">
             {evnt.eventTitle}
           </CardTitle>
 
           <p>{dateToText(evnt.eventDate)}</p>
 
-          <CardDescription>{evnt.eventDescription}</CardDescription>
+          <CardDescription className=" line-clamp-2">{evnt.eventDescription}</CardDescription>
         </CardHeader>
 
         <CardFooter>
