@@ -13,8 +13,8 @@ export default function Home() {
   return (
     <div>
       <Banner/>
-      <RecentUpcomingEvent/>
       <FeatureSection/>
+      <RecentUpcomingEvent/>
       <GallerySection/>
       <NewsletterSection/>
 
