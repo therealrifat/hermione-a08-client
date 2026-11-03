@@ -3,7 +3,7 @@ import FeatureSection from "@/components/home-page/feature-section";
 import GallerySection from "@/components/home-page/gallery-section";
 import NewsletterSection from "@/components/home-page/newsletter-section";
 import RecentUpcomingEvent from "@/components/home-page/recent-upcoming-event";
-import Footer from "@/components/shared/Footer";
+
 
 
 
