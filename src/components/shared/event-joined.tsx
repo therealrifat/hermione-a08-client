@@ -22,6 +22,7 @@ const EventJoind = ({ data }: {data: IEvent}) => {
 
     const jointEvent = {
       eventId: data._id,
+      eventDate: data.eventDate,
       eventName: data.eventTitle,
       email: session?.user.email
     };
