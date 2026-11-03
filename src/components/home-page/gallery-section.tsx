@@ -84,7 +84,7 @@ const GallerySection = () => {
       </div>
 
       {/* Photo grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[160px] md:auto-rows-[200px]">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-40 md:auto-rows-[200px]">
         {galleryData.map((item, ind) => (
           <div
             key={ind}
