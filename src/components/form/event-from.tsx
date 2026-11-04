@@ -13,14 +13,14 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
-import  React, { useState } from "react";
+import React, { useState } from "react";
 import { format } from "date-fns";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
+import { getTokenFormClient } from "@/lib/getTokenFormClient";
 
 export default function EventFrom() {
-
   const [category, setCategory] = useState("Education");
   const [date, setDate] = useState<Date>();
   const eventDate = date ? format(date, "yyyy-MM-dd") : "";
@@ -31,40 +31,41 @@ export default function EventFrom() {
     { label: "Health & Wellness", value: "Health & Wellness" },
     { label: "Community & Culture", value: "Community & Culture" },
   ];
-  const { 
-        data: session, 
-        
-    } = authClient.useSession() 
-
-    const userInfo = session?.user
+  const { data: session } = authClient.useSession();
 
 
+  const userInfo = session?.user;
+ 
+  
 
-  const handleEventForm =async(e: React.FormEvent<HTMLFormElement>)=>{
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    const event = Object.fromEntries(formData.entries())
-    const eventData ={...event, eventDate, category, creatorName: userInfo?.name, creatorEmail: userInfo?.email }
+  const handleEventForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const event = Object.fromEntries(formData.entries());
+    const eventData = {
+      ...event,
+      eventDate,
+      category,
+      creatorName: userInfo?.name,
+      creatorEmail: userInfo?.email,
+    };
+     const token= await getTokenFormClient()
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/events`,{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/events`, {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(eventData)
-    })
+      headers: { "Content-Type": "application/json" ,
+      authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(eventData),
+    });
 
-    const afterSubmit = await res.json()
+    const afterSubmit = await res.json();
 
-    if(afterSubmit.insertedId){
-
-      toast.success("Event Added Successful")
-      redirect('/events')
+    if (afterSubmit.insertedId) {
+      toast.success("Event Added Successful");
+      redirect("/events");
     }
-
-
-
-
-
-  }
+  };
 
   return (
     <div className="border p-10 rounded-2xl">
@@ -114,7 +115,14 @@ export default function EventFrom() {
             </Field>
             <Field>
               <FieldLabel htmlFor="form-category">Category</FieldLabel>
-              <Select items={categoris} onValueChange={(value) => { if (value !== null) setCategory(value); }} value={category} defaultValue="Education">
+              <Select
+                items={categoris}
+                onValueChange={(value) => {
+                  if (value !== null) setCategory(value);
+                }}
+                value={category}
+                defaultValue="Education"
+              >
                 <SelectTrigger id="form-category">
                   <SelectValue />
                 </SelectTrigger>
@@ -161,7 +169,9 @@ export default function EventFrom() {
             <Button type="reset" variant="outline">
               Reset
             </Button>
-            <Button type="submit" disabled={date ? false : true} >Submit</Button>
+            <Button type="submit" disabled={date ? false : true}>
+              Submit
+            </Button>
           </Field>
         </FieldGroup>
       </form>

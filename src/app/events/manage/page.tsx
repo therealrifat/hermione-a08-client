@@ -3,6 +3,7 @@ import EventEditPage from "@/components/shared/event-edit";
 import { IEvent } from "@/components/shared/eventCard";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
+import { getTokenFormServer } from "@/lib/getTokenFormServer";
 import {
   CalendarDays,
   CalendarPlus,
@@ -26,8 +27,10 @@ const formatShortDate = (date: string) => {
 };
 
 const ManageEvent = async () => {
+  const token = await getTokenFormServer();
+
   const session = await auth.api.getSession({
-    headers: await headers(), // you need to pass the headers object.
+    headers: await headers(),
   });
 
   let yourEvents: IManageEvent[] = [];
@@ -36,7 +39,12 @@ const ManageEvent = async () => {
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/manage/${session.user.email}`,
-        { cache: "no-store" }
+        {
+          cache: "no-store",
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        },
       );
 
       if (res.ok) {
@@ -44,7 +52,8 @@ const ManageEvent = async () => {
         yourEvents = Array.isArray(data)
           ? [...data].sort(
               (a: IManageEvent, b: IManageEvent) =>
-                new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
+                new Date(a.eventDate).getTime() -
+                new Date(b.eventDate).getTime(),
             )
           : [];
       }
@@ -112,7 +121,9 @@ const ManageEvent = async () => {
       {eventCount === 0 ? (
         <div className="flex flex-col items-center gap-3 rounded-2xl border bg-green-50/50 px-6 py-12 text-center mb-10 dark:bg-green-950/40">
           <CalendarPlus className="h-8 w-8 text-green-500 dark:text-green-400" />
-          <h2 className="text-lg font-bold text-green-900 dark:text-green-400">No events yet</h2>
+          <h2 className="text-lg font-bold text-green-900 dark:text-green-400">
+            No events yet
+          </h2>
           <p className="text-sm text-muted-foreground">
             Bring your community together — create your first event and inspire
             others to join.

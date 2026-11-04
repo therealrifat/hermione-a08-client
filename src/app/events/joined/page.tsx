@@ -1,6 +1,7 @@
 import { IEvent } from "@/components/shared/eventCard";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
+import { getTokenFormServer } from "@/lib/getTokenFormServer";
 import {
   BadgeCheck,
   CalendarDays,
@@ -36,6 +37,7 @@ const JoinedEvent = async () => {
   const session = await auth.api.getSession({
     headers: await headers(), // you need to pass the headers object.
   });
+    const token = await getTokenFormServer();
 
   let joinedEvents: IJoinedRow[] = [];
 
@@ -43,7 +45,12 @@ const JoinedEvent = async () => {
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/EventJoin/${session.user.email}`,
-        { cache: "no-store" }
+        {
+          cache: "no-store",
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        },
       );
 
       if (res.ok) {
@@ -56,7 +63,7 @@ const JoinedEvent = async () => {
               try {
                 const detailRes = await fetch(
                   `${process.env.NEXT_PUBLIC_SERVER_URL}/events/${join.eventId}`,
-                  { cache: "no-store" }
+                  { cache: "no-store" },
                 );
 
                 if (detailRes.ok) {
@@ -67,13 +74,13 @@ const JoinedEvent = async () => {
               } catch {
                 return { ...join, _id: join.eventId };
               }
-            })
+            }),
           );
 
           joinedEvents = withDetails.sort(
             (a, b) =>
               new Date(a.eventDate ?? 0).getTime() -
-              new Date(b.eventDate ?? 0).getTime()
+              new Date(b.eventDate ?? 0).getTime(),
           );
         }
       }
@@ -209,9 +216,7 @@ const JoinedEvent = async () => {
                   <td className="hidden md:table-cell max-w-[180px] px-4 py-3">
                     <span className="flex items-center gap-1.5 text-muted-foreground">
                       <MapPin className="h-3.5 w-3.5 shrink-0 text-green-600 dark:text-green-400" />
-                      <span className="truncate">
-                        {event.location ?? "—"}
-                      </span>
+                      <span className="truncate">{event.location ?? "—"}</span>
                     </span>
                   </td>
                   <td className="px-4 py-3">
