@@ -30,6 +30,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { getTokenFormClient } from "@/lib/getTokenFormClient";
 
 const EventEditPage = ({ evnt }: { evnt: IEvent }) => {
   const [category, setCategory] = useState(evnt.eventType);
@@ -49,18 +50,21 @@ const EventEditPage = ({ evnt }: { evnt: IEvent }) => {
     const event = Object.fromEntries(formData.entries());
 
     const updateEvent= {...event, eventDate, category,}
-    console.log(updateEvent, `${process.env.NEXT_PUBLIC_SERVER_URL}/manage/${evnt._id}`)
+    const token = await getTokenFormClient()
+
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/manage/${evnt._id}`,{
       method:"PATCH",
-      headers: {"Content-Type": "application/json"},
+      headers: {"Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(updateEvent)
     })
 
     const afterSubmit = await res.json()
     console.log(afterSubmit)
     if(afterSubmit.modifiedCount > 0){
-          console.log(afterSubmit)
+
           toast.success("Event Update Successfull")
           router.refresh()
     }

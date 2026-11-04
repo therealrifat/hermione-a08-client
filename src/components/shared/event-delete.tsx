@@ -17,15 +17,20 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { DialogClose } from "../ui/dialog";
 import { Button } from "../ui/button";
+import { getTokenFormClient } from "@/lib/getTokenFormClient";
 
 const EventDelete = ({ id }: { id: string }) => {
   const router = useRouter();
 
   const handleDeleteEvent = async () => {
+    const token = await getTokenFormClient()
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/manage/${id}`,
       {
         method: "DELETE",
+        headers: {
+        authorization: `Bearer ${token}`,
+      },
       },
     );
 
