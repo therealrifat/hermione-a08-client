@@ -42,7 +42,7 @@ const EventCard = ({ evnt }: { evnt: IEvent }) => {
           alt="Event cover"
           width={500}
           height={500}
-          className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
+          className="relative z-20 aspect-video w-full object-cover brightness dark:brightness-40"
         />
         <CardHeader>
           <CardAction>
