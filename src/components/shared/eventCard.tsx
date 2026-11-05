@@ -21,6 +21,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
+import { Calendar1, MapPin } from "lucide-react";
 
 export const dateToText = (date: string) => {
   const formattedDate = new Date(date).toLocaleDateString("en-US", {
@@ -35,7 +36,7 @@ export const dateToText = (date: string) => {
 const EventCard = ({ evnt }: { evnt: IEvent }) => {
   return (
     <div>
-      <Card className="relative mx-auto w-full h-100 max-w-sm pt-0">
+      <Card className="relative mx-auto w-full h-115 max-w-sm pt-0">
         <div className="absolute  z-30  " />
         <Image
           src={evnt.image}
@@ -44,17 +45,23 @@ const EventCard = ({ evnt }: { evnt: IEvent }) => {
           height={500}
           className="relative z-20 aspect-video w-full object-cover brightness dark:brightness-40"
         />
-        <CardHeader>
+        <CardHeader className="flex flex-col gap-2">
           <CardAction>
-            <Badge variant="secondary">{evnt.eventType}</Badge>
+            <Badge className="text-xs text-muted-foreground" variant="secondary">{evnt.category}</Badge>
           </CardAction>
           <CardTitle className="text-lg text-green-500 line-clamp-1">
             {evnt.eventTitle}
           </CardTitle>
 
-          <p>{dateToText(evnt.eventDate)}</p>
+          <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><Calendar1 className="h-3.5 w-3.5 text-green-600" /> {dateToText(evnt.eventDate)}</p>
+          <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <MapPin className="h-3.5 w-3.5 text-green-600" />
+            {evnt.location}
+          </p>
 
-          <CardDescription className=" line-clamp-2">{evnt.eventDescription}</CardDescription>
+          <CardDescription className=" line-clamp-2">
+            {evnt.eventDescription}
+          </CardDescription>
         </CardHeader>
 
         <CardFooter>
