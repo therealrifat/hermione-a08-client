@@ -45,7 +45,7 @@ export default function EventFrom() {
     const eventData = {
       ...event,
       eventDate,
-      category,
+      eventType:category,
       creatorName: userInfo?.name,
       creatorEmail: userInfo?.email,
     };

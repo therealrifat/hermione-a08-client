@@ -3,7 +3,7 @@ import Image from "next/image";
 export interface IEvent {
   _id: string;
   eventTitle: string;
-  category: string;
+  eventType: string;
   eventDate: string;
   location: string;
   image: string;
@@ -47,7 +47,7 @@ const EventCard = ({ evnt }: { evnt: IEvent }) => {
         />
         <CardHeader className="flex flex-col gap-2">
           <CardAction>
-            <Badge className="text-xs text-muted-foreground" variant="secondary">{evnt.category}</Badge>
+            <Badge className="text-xs text-muted-foreground" variant="secondary">{evnt.eventType}</Badge>
           </CardAction>
           <CardTitle className="text-lg text-green-500 line-clamp-1">
             {evnt.eventTitle}
