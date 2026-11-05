@@ -48,7 +48,7 @@ const EventCard = ({ evnt }: { evnt: IEvent }) => {
           <CardAction>
             <Badge variant="secondary">{evnt.eventType}</Badge>
           </CardAction>
-          <CardTitle className="text-lg text-green-500">
+          <CardTitle className="text-lg text-green-500 line-clamp-1">
             {evnt.eventTitle}
           </CardTitle>
 
