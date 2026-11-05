@@ -3,7 +3,7 @@ import Image from "next/image";
 export interface IEvent {
   _id: string;
   eventTitle: string;
-  eventType: string;
+  category: string;
   eventDate: string;
   location: string;
   image: string;
